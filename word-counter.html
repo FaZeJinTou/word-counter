@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>文字统计工具</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      color: #333;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      padding: 1rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    .stats {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .stat-item {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>文字统计工具</h1>
+  <textarea id="textInput" placeholder="请输入文字..."></textarea>
+  <div class="stats">
+    <div class="stat-item">总字数（含空格）：<span id="totalChars">0</span></div>
+    <div class="stat-item">总字数（不含空格）：<span id="charsNoSpaces">0</span></div>
+    <div class="stat-item">行数：<span id="lineCount">0</span></div>
+    <div class="stat-item">英文单词数：<span id="wordCount">0</span></div>
+  </div>
+
+  <script>
+    const textInput = document.getElementById('textInput');
+    const totalChars = document.getElementById('totalChars');
+    const charsNoSpaces = document.getElementById('charsNoSpaces');
+    const lineCount = document.getElementById('lineCount');
+    const wordCount = document.getElementById('wordCount');
+
+    function updateStats() {
+      const text = textInput.value;
+      totalChars.textContent = text.length;
+      charsNoSpaces.textContent = text.replace(/\s/g, '').length;
+      lineCount.textContent = text.split(/\n/).length;
+      wordCount.textContent = (text.match(/\b[a-zA-Z]+\b/g) || []).length;
+    }
+
+    textInput.addEventListener('input', updateStats);
+  </script>
+</body>
+</html>
